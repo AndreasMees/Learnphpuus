@@ -1,33 +1,16 @@
-<?php 
-// kui ainult php tekst, siis lõpu tagi pole vaja
+<?php include __DIR__ . '/partials/header.php'; ?>
 
-// printimine, võivad olla ka sulud
-echo "Hello World!\n";
-echo ("Hello World!\n");
+  <main class="container">
+      <?php include __DIR__ . '/partials/hero.php'; ?>
+      <?php include __DIR__ . '/partials/feature.php'; ?>
 
-// muutjuad algavad dollari märgiga
-$arv = 12;
-
-echo $arv;
-echo 'arv is $arv';
-echo "\narv is $arv\n";
-
-// tekstide liitmine on punktiga
-echo $arv . "kuud\n";
-
-$num = 1;
-$num = $num + 1;
-$num++;
-$num--;
-$num += 1;
-$num -= 1;
-$num *= 1;
-$num /= 1;
-$num %= 5;
-$num = 1.3;
-$num **=2;
-$num = true;
-$num = false;
-$bar; // muutuja väärtus puudub (null)
-var_dump($num);
-var_dump($bar);
+      <div class="row g-5">
+        <div class="col-md-8">
+          <?php include __DIR__ . '/partials/posts.php'; ?>
+        </div>
+        <div class="col-md-4">
+          <?php include __DIR__ . '/partials/sidebar.php'; ?>
+        </div>
+      </div>
+    </main>
+<?php include __DIR__ . '/partials/footer.php'; ?>
