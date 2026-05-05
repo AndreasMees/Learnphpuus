@@ -1,39 +1,29 @@
 <?php
-namespace App;
+namespace App\Models;
 
-class Router {
-    private static $routes = [];
+use App\DB;
 
-    private $path;
-    private $method;
-
-    public function __construct($url, $method)
-    {
-        $this->path = parse_url($url, PHP_URL_PATH);
-        $this->method = $method;
+class Model {
+    protected static $table;
+    
+    public static function all() {
+        $db = new DB();
+        return $db->all(static::$table, static::class);
     }
-
-    public function match(){
-        foreach(self::$routes as $route) {
-            if($this->path === $route['path'] && $this->method === $route['method']) {
-                return $route;
-            }
-        }
+    
+    public static function find($id) {
+        $db = new DB();
+        return $db->find(static::$table, static::class, $id);
     }
-
-    public static function getRoutes(){
-        return self::$routes;
+    
+    public static function where($field, $value) {
+        $db = new DB();
+        return $db->where(static::$table, static::class, $field, $value);
     }
-
-    public static function addRoute($method, $path, $action) {
-        self::$routes[] = ['method' => $method, 'path' => $path, 'action' => $action];
+    
+    public function save() {
+        // Your save logic
     }
-
-    public static function get($path, $action) {
-        self::addRoute('GET', $path, $action);
-    }
-
-    public static function post($path, $action) {
-        self::addRoute('POST', $path, $action);
-    }
+    
+    // Other model methods...
 }
