@@ -45,4 +45,11 @@ foreach($array as &$value) {
     $value *= 2;
 }
 
-var_dump($array);
+// recursive loop
+function recursive($i) {
+    if($i < 10) {
+        var_dump($i);
+        recursive($i + 1);
+    }
+}
+recursive(0);
