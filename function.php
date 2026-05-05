@@ -8,13 +8,13 @@ hello();
 function helloName($name = 'idk') {
     var_dump('Hello ' . $name);
 }
-helloName('Martin');
+helloName('Andreas');
 helloName();
 
 function helloNameAndAge($name = 'idk', $age = 'idk') {
     var_dump("Hello $name and you are $age years old");
 }
-helloNameAndAge('Martin', 18);
+helloNameAndAge('Andreas', 18);
 helloNameAndAge();
 
 // ... spread operator
