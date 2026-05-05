@@ -21,7 +21,7 @@ $posts = [
     [
       'title' => 'U.S news1',
       'published' => '19.09.2025',
-      'author' => 'GRow',
+      'author' => 'Grow',
       'body' => 'Some U.S news 4'
     ]
   ]
