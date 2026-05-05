@@ -1,6 +1,6 @@
 <?php include __DIR__ . '/../partials/header.php'; ?>
 <main class="container">
-    <form action="/posts" method="POSTS">
+    <form action="/posts" method="POST">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input name="title" type="text" class="form-control" id="title" placeholder="Title">

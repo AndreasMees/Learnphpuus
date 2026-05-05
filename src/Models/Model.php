@@ -1,42 +1,39 @@
 <?php
+namespace App;
 
-namespace App\Models;
+class Router {
+    private static $routes = [];
 
-use App\DB;
+    private $path;
+    private $method;
 
-abstract class Model
-{
-    public static $table;
-    public $id;
-
-    public static function all()
+    public function __construct($url, $method)
     {
-        $db = new DB();
-        return $db->all(static::$table, static::class);
+        $this->path = parse_url($url, PHP_URL_PATH);
+        $this->method = $method;
     }
 
-    public static function find($id)
-    {
-        $db = new DB();
-        return $db->find(static::$table, static::class, $id);
-    }
-
-    public function save()
-    {
-        $db = new DB();
-        $fields = get_object_vars($this);
-        unset($fields['id']);
-
-        if ($this->id) {
-            $db->update(static::$table, $fields, $this->id);
-        } else {
-            $db->insert(static::$table, $fields);
+    public function match(){
+        foreach(self::$routes as $route) {
+            if($this->path === $route['path'] && $this->method === $route['method']) {
+                return $route;
+            }
         }
     }
 
-    public function delete()
-    {
-        $db = new DB();
-        $db->delete(static::$table, $this->id);
+    public static function getRoutes(){
+        return self::$routes;
+    }
+
+    public static function addRoute($method, $path, $action) {
+        self::$routes[] = ['method' => $method, 'path' => $path, 'action' => $action];
+    }
+
+    public static function get($path, $action) {
+        self::addRoute('GET', $path, $action);
+    }
+
+    public static function post($path, $action) {
+        self::addRoute('POST', $path, $action);
     }
 }

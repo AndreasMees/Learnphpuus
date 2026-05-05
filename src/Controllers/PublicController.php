@@ -10,7 +10,7 @@ class PublicController
             [
                 'title' => 'World news1',
                 'published' => '16.09.2025',
-                'author' => 'Andreas',
+                'author' => 'Martin',
                 'body' => 'Some world news 1'
             ],
             [
@@ -41,7 +41,7 @@ class PublicController
             [
                 'title' => 'U.S news1',
                 'published' => '16.09.2025',
-                'author' => 'Andreas',
+                'author' => 'Martin',
                 'body' => 'Some U.S news 1'
             ],
             [
@@ -66,13 +66,11 @@ class PublicController
         view('us', compact('posts'));
     }
 
-    public function form()
-    {
+    public function form(){
         view('form');
     }
 
-    public function answer()
-    {
+    public function answer(){
         dump($_GET);
         dump($_POST);
     }

@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 class Router {
@@ -7,19 +6,19 @@ class Router {
 
     private $path;
     private $method;
-    public function __construct($path, $method)
+
+    public function __construct($url, $method)
     {
-        $this->path = parse_url($path, PHP_URL_PATH);
+        $this->path = parse_url($url, PHP_URL_PATH);
         $this->method = $method;
     }
 
-    public function match() {
+    public function match(){
         foreach(self::$routes as $route) {
-            if($route['path'] === $this->path && $route['method'] === $this->method){
+            if($this->path === $route['path'] && $this->method === $route['method']) {
                 return $route;
             }
         }
-        return false;
     }
 
     public static function getRoutes(){
