@@ -30,6 +30,15 @@ class DB
         return $stmt->fetchAll();
     }
 
+    public function find($table, $class, $id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM $table WHERE id = $id");
+        $stmt->execute();
+        // set the resulting array to associative
+        $stmt->setFetchMode(PDO::FETCH_CLASS, $class);
+        return $stmt->fetch();
+    }
+
     public function insert($table, $fields)
     {
         $fieldNames = array_keys($fields);
@@ -41,5 +50,21 @@ class DB
                 VALUES ('$fieldValuesText')";
         // use exec() because no results are returned
         $this->conn->exec($sql);
+    }
+
+    public function update($table, $fields, $id) {
+        $updateText = '';
+        foreach($fields as $key => $value) {
+            $updateText .= "$key='$value', ";
+        }
+        $updateText = substr($updateText, 0, -2);
+
+        $sql = "UPDATE $table SET $updateText WHERE id=$id";
+
+        // Prepare statement
+        $stmt = $this->conn->prepare($sql);
+
+        // execute the query
+        $stmt->execute();
     }
 }
